@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-
+import { Observable } from 'rxjs'
 export interface Position {
   x: number;
   y: number;
@@ -24,7 +24,14 @@ export class NzGlobalMonitorService {
 
   _observeGlobalEvents(): void {
     // 监听document的点击事件，记录点击坐标，并抛出 documentClick 事件
-    document.addEventListener('click', (e) => {
+    // document.addEventListener('click', (e) => {
+    //   this.lastClickPos = {
+    //     x: e.clientX,
+    //     y: e.clientY
+    //   };
+    //   this._navItemSource.emit('documentClick');
+    // });
+    Observable.fromEvent(document,'click', (e) => {
       this.lastClickPos = {
         x: e.clientX,
         y: e.clientY
